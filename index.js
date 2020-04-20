@@ -26,7 +26,7 @@ app.get("/api/courses/:id", (req, res) => {
   });
 
   if (!course)
-    res.status(404).send("The course with the given id was not found");
+    return res.status(404).send("The course with the given id was not found");
 
   res.status(200).send(course);
 });
@@ -34,7 +34,7 @@ app.get("/api/courses/:id", (req, res) => {
 app.post("/api/courses", (req, res) => {
   const result = validateCourse(req.body);
   if (!result) {
-    res.status(400).send("Name is required and should be min 3 chars!");
+    return res.status(400).send("Name is required and should be min 3 chars!");
   }
 
   const course = {
@@ -51,12 +51,12 @@ app.put("/api/courses/:id", (req, res) => {
   });
 
   if (!course)
-    res.status(404).send("The course with the given id was not found");
+    return res.status(404).send("The course with the given id was not found");
 
   const result = validateCourse(req.body);
   console.log(result);
   if (!result) {
-    res.status(400).send("Name is required and should be min 3 chars!");
+    return res.status(400).send("Name is required and should be min 3 chars!");
   }
 
   course.name = req.body.name;
@@ -69,7 +69,7 @@ app.delete("/api/courses/:id", (req, res) => {
   });
 
   if (!course)
-    res.status(404).send("The course with the given id was not found");
+    return res.status(404).send("The course with the given id was not found");
 
   courses.splice(courses.indexOf(course), 1);
   res.send(course);
