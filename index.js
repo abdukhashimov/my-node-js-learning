@@ -1,18 +1,11 @@
 const express = require("express");
+const logger = require("./logger");
 
 const app = express();
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  console.log("Login...");
-  next();
-});
-
-app.use((req, res, next) => {
-  console.log("Authenticating...");
-  next();
-});
+app.use(logger);
 
 const port = process.env.PORT || 3000;
 
