@@ -1,3 +1,5 @@
+const startupDebugger = require("debug")("app:startup");
+const dbDebugger = require("debug")("app:db");
 const config = require("config");
 const morgan = require("morgan");
 const helmet = require("helmet");
@@ -18,10 +20,13 @@ console.log("Mail password: " + config.get("mail.password"));
 
 if (app.get("env") === "development") {
   app.use(morgan("tiny"));
-  console.log("Morgan is enabled...");
+  startupDebugger("Morgan is enabled...");
 }
 
 const port = process.env.PORT || 3000;
+
+// database debugger.
+dbDebugger("Db is now ready to accept connections...");
 
 const courses = [
   { id: 1, name: "course1" },
