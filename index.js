@@ -9,7 +9,10 @@ app.use(express.json());
 app.use(logger);
 app.use(authenticating);
 app.use(helmet());
-app.use(morgan("tiny"));
+if (app.get("env") === "development") {
+  app.use(morgan("tiny"));
+  console.log("Morgan is enabled...");
+}
 
 const port = process.env.PORT || 3000;
 
@@ -89,4 +92,4 @@ function validateCourse(course) {
   return true;
 }
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => console.log(`Listening on port ${port}...`));
