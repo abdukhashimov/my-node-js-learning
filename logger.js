@@ -8,4 +8,4 @@ function authenticating(req, res, next) {
   next();
 }
 
-module.exports = logger;
+module.exports = { logger, authenticating };

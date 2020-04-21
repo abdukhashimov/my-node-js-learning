@@ -1,11 +1,11 @@
 const express = require("express");
-const logger = require("./logger");
-
+const { logger, authenticating } = require("./logger");
 const app = express();
 
 app.use(express.json());
 
 app.use(logger);
+app.use(authenticating);
 
 const port = process.env.PORT || 3000;
 
