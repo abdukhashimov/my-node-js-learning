@@ -1,3 +1,5 @@
+const morgan = require("morgan");
+const helmet = require("helmet");
 const express = require("express");
 const { logger, authenticating } = require("./logger");
 const app = express();
@@ -6,6 +8,8 @@ app.use(express.json());
 
 app.use(logger);
 app.use(authenticating);
+app.use(helmet());
+app.use(morgan("tiny"));
 
 const port = process.env.PORT || 3000;
 
